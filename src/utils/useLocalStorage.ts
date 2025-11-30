@@ -34,12 +34,19 @@ export function useLocalStorage<T>(
   defaultValue: T,
   ttl?: number
 ): [T, typeof setValue] {
-  const [value, setValue] = useState(defaultValue)
+  // Lazily initialize from localStorage to avoid an extra render on mount
+  const [value, setValue] = useState<T>(() => {
+    const stored = getWithExpiry<T>(key)
+    return stored !== undefined ? stored : defaultValue
+  })
 
+  // If the storage key changes, sync state to the new key's value (if present)
   useEffect(() => {
-    const item = getWithExpiry<T>(key)
-    if (item !== undefined) setValue(item)
-  }, [key])
+    const stored = getWithExpiry<T>(key)
+    if (stored !== undefined && !Object.is(stored, value)) {
+      setValue(stored)
+    }
+  }, [key, value])
 
   useEffect(() => {
     localStorage.setItem(
