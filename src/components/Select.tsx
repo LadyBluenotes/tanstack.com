@@ -4,10 +4,6 @@ import { Listbox, Transition } from '@headlessui/react'
 import { HiCheck, HiChevronDown } from 'react-icons/hi'
 
 import * as React from 'react'
-import { Link, useNavigate } from '@tanstack/react-router'
-import { notFound, Outlet, useParams } from '@tanstack/react-router'
-import { create } from 'zustand'
-import { Scarf } from '~/components/Scarf'
 import {
   findLibrary,
   Framework,

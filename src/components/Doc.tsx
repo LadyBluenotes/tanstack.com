@@ -3,7 +3,6 @@ import {
   BsArrowsCollapseVertical,
   BsArrowsExpandVertical,
 } from 'react-icons/bs'
-import { FaEdit } from 'react-icons/fa'
 import { twMerge } from 'tailwind-merge'
 import { useWidthToggle } from '~/components/DocsLayout'
 import { DocTitle } from '~/components/DocTitle'
@@ -14,7 +13,7 @@ import {
 } from '~/components/MarkdownHeadingContext'
 import { AdGate } from '~/contexts/AdsContext'
 import { CopyMarkdownButton } from './CopyMarkdownButton'
-import { GamHeader, GamLeader } from './Gam'
+import { GamHeader } from './Gam'
 import { Toc } from './Toc'
 import { TocMobile } from './TocMobile'
 
