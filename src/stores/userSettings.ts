@@ -19,6 +19,7 @@ type UserSettingsState = {
   // Remove toggleAds since it's now handled by the new hooks
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const useUserSettingsStore = create<UserSettingsState>()((set, get) => ({
   settings: {
     // Remove adsDisabled initialization

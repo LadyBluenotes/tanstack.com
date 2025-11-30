@@ -31,6 +31,7 @@ export const Route = createFileRoute('/$libraryId/$version/docs')({
     }
   },
   component: DocsRoute,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   headers: (ctx) => {
     return {
       'cache-control': 'public, max-age=0, must-revalidate',

@@ -184,6 +184,7 @@ async function getGithubSponsors() {
         'jherr',
         'seancassiere',
         'schiller-manuel',
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       ].flatMap((d, i1) =>
         new Array(20).fill(d).map((d, i2) => ({
           login: d,

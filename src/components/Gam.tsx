@@ -74,12 +74,14 @@ const gamDivs = {
 
 function GamAd({
   name,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   children,
   adClassName,
   className,
   placeholderClassName,
   popupPosition = 'bottom',
   borderClassName,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   style,
   ...props
 }: { name: keyof typeof gamDivs } & React.HTMLAttributes<HTMLDivElement> & {

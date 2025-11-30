@@ -49,6 +49,56 @@ export default function CookieConsent() {
       ? JSON.parse(localStorage.getItem('cookie_consent') || '{}')
       : { analytics: false, ads: false }
 
+  const restoreGoogleScripts = () => {
+    if (!document.querySelector("script[src*='googletagmanager.com']")) {
+      const script = document.createElement('script')
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=GTM-5N57KQT4'
+      script.async = true
+      document.body.appendChild(script)
+    }
+  }
+
+  const blockGoogleScripts = () => {
+    document.querySelectorAll('script').forEach((script) => {
+      if (
+        script.src?.includes('googletagmanager.com') ||
+        script.textContent?.includes('gtag(')
+      ) {
+        script.remove()
+      }
+    })
+    document.cookie =
+      '_ga=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.google.com'
+    document.cookie =
+      '_gid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.google.com'
+  }
+
+  const updateGTMConsent = (settings: { analytics: boolean; ads: boolean }) => {
+    window.dataLayer = window.dataLayer || []
+    window.dataLayer.push({
+      event: 'cookie_consent',
+      consent: {
+        analytics_storage: settings.analytics ? 'granted' : 'denied',
+        ad_storage: settings.ads ? 'granted' : 'denied',
+        ad_personalization: settings.ads ? 'granted' : 'denied',
+      },
+    })
+
+    if (typeof window.gtag === 'function') {
+      window.gtag('consent', 'update', {
+        analytics_storage: settings.analytics ? 'granted' : 'denied',
+        ad_storage: settings.ads ? 'granted' : 'denied',
+        ad_personalization: settings.ads ? 'granted' : 'denied',
+      })
+    }
+
+    if (settings.analytics || settings.ads) {
+      restoreGoogleScripts()
+    } else {
+      blockGoogleScripts()
+    }
+  }
+
   useEffect(() => {
     const checkLocationAndSetConsent = async () => {
       // Only check location if no consent has been set yet
@@ -86,32 +136,6 @@ export default function CookieConsent() {
     checkLocationAndSetConsent()
   }, [])
 
-  const updateGTMConsent = (settings: { analytics: boolean; ads: boolean }) => {
-    window.dataLayer = window.dataLayer || []
-    window.dataLayer.push({
-      event: 'cookie_consent',
-      consent: {
-        analytics_storage: settings.analytics ? 'granted' : 'denied',
-        ad_storage: settings.ads ? 'granted' : 'denied',
-        ad_personalization: settings.ads ? 'granted' : 'denied',
-      },
-    })
-
-    if (typeof window.gtag === 'function') {
-      window.gtag('consent', 'update', {
-        analytics_storage: settings.analytics ? 'granted' : 'denied',
-        ad_storage: settings.ads ? 'granted' : 'denied',
-        ad_personalization: settings.ads ? 'granted' : 'denied',
-      })
-    }
-
-    if (settings.analytics || settings.ads) {
-      restoreGoogleScripts()
-    } else {
-      blockGoogleScripts()
-    }
-  }
-
   const acceptAllCookies = () => {
     const consent = { analytics: true, ads: true }
     localStorage.setItem('cookie_consent', JSON.stringify(consent))
@@ -128,30 +152,6 @@ export default function CookieConsent() {
 
   const openSettings = () => setShowSettings(true)
   const closeSettings = () => setShowSettings(false)
-
-  const blockGoogleScripts = () => {
-    document.querySelectorAll('script').forEach((script) => {
-      if (
-        script.src?.includes('googletagmanager.com') ||
-        script.textContent?.includes('gtag(')
-      ) {
-        script.remove()
-      }
-    })
-    document.cookie =
-      '_ga=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.google.com'
-    document.cookie =
-      '_gid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.google.com'
-  }
-
-  const restoreGoogleScripts = () => {
-    if (!document.querySelector("script[src*='googletagmanager.com']")) {
-      const script = document.createElement('script')
-      script.src = 'https://www.googletagmanager.com/gtag/js?id=GTM-5N57KQT4'
-      script.async = true
-      document.body.appendChild(script)
-    }
-  }
 
   return (
     <>

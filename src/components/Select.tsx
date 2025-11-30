@@ -1,17 +1,6 @@
 import { Fragment } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
-
 import { HiCheck, HiChevronDown } from 'react-icons/hi'
-
-import * as React from 'react'
-import {
-  findLibrary,
-  Framework,
-  getFrameworkOptions,
-  getLibrary,
-  LibraryId,
-} from '~/libraries'
-import { seo } from '~/utils/seo'
 
 export type SelectOption = {
   label: string

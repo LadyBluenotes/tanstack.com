@@ -39,6 +39,7 @@ function FormVersionIndex() {
   const { version } = Route.useParams()
   const branch = getBranch(formProject, version)
   const [framework, setFramework] = React.useState<Framework>('react')
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isDark] = React.useState(true)
 
   return (

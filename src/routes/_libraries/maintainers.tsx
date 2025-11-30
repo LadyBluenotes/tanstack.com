@@ -720,15 +720,18 @@ function RouteComponent() {
                 </p>
               )}
 
-              {groupedMaintainers.map((group, index) => (
-                <MaintainerGrid
-                  key={group.title || 'all'}
-                  maintainers={group.maintainers}
-                  viewMode={search.viewMode}
-                  title={group.title}
-                  stats={stats}
-                />
-              ))}
+              {
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                groupedMaintainers.map((group, index) => (
+                  <MaintainerGrid
+                    key={group.title || 'all'}
+                    maintainers={group.maintainers}
+                    viewMode={search.viewMode}
+                    title={group.title}
+                    stats={stats}
+                  />
+                ))
+              }
             </div>
           ) : (
             <div className="text-center text-gray-600 dark:text-gray-400">

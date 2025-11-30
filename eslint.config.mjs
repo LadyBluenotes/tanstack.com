@@ -37,11 +37,9 @@ export default [
       '@typescript-eslint/no-unused-vars': [
         'warn',
         {
-          // Ignore common placeholders and error/event params
           argsIgnorePattern: '(^_)|(^__+$)|(^e$)|(^error$)',
           varsIgnorePattern: '(^_)|(^__+$)|(^e$)|(^error$)',
           caughtErrorsIgnorePattern: '(^_)|(^__+$)|(^e$)|(^error$)',
-          ignoreRestSiblings: true,
         },
       ],
       'no-redeclare': 'off',
