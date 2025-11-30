@@ -41,7 +41,10 @@ export default [
     rules: {
       // Prefer TS versions of core rules
       'no-unused-vars': 'off',
-      '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_' },
+      ],
       'no-redeclare': 'off',
       '@typescript-eslint/no-redeclare': 'error',
       'no-shadow': 'off',
