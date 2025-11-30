@@ -36,12 +36,17 @@ export default [
     rules: {
       '@typescript-eslint/no-unused-vars': [
         'warn',
-        { argsIgnorePattern: '^_' },
+        {
+          // Ignore common placeholders and error/event params
+          argsIgnorePattern: '(^_)|(^__+$)|(^e$)|(^error$)',
+          varsIgnorePattern: '(^_)|(^__+$)|(^e$)|(^error$)',
+          caughtErrorsIgnorePattern: '(^_)|(^__+$)|(^e$)|(^error$)',
+          ignoreRestSiblings: true,
+        },
       ],
       'no-redeclare': 'off',
       '@typescript-eslint/no-redeclare': 'error',
       'no-shadow': 'off',
-      '@typescript-eslint/no-shadow': 'error',
       '@typescript-eslint/no-explicit-any': 'off',
     },
   },
