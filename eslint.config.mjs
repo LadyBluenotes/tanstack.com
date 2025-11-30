@@ -1,4 +1,3 @@
-// ESLint flat config for TanStack.com (TypeScript-first, with React)
 import js from '@eslint/js'
 import * as tseslint from 'typescript-eslint'
 import react from 'eslint-plugin-react'
@@ -22,25 +21,19 @@ const ignores = [
 
 export default [
   { ignores },
-  // JS/JSX files: use core JS recommendations
   {
     files: ['**/*.{js,jsx}'],
     ...js.configs.recommended,
   },
-  // TS/TSX files: prefer TypeScript ESLint recommendations (non type-checked to reduce noise)
   ...tseslint.configs.recommended,
   {
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       parserOptions: {
-        // Keep non type-checked config to approximate previous behavior
-        // (add project here to enable type-aware rules in a future pass)
         tsconfigRootDir: __dirname,
       },
     },
     rules: {
-      // Prefer TS versions of core rules
-      'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': [
         'warn',
         { argsIgnorePattern: '^_' },
@@ -49,9 +42,9 @@ export default [
       '@typescript-eslint/no-redeclare': 'error',
       'no-shadow': 'off',
       '@typescript-eslint/no-shadow': 'error',
+      '@typescript-eslint/no-explicit-any': 'off',
     },
   },
-  // React + Hooks rules applied to both TSX/JSX
   {
     files: ['**/*.{ts,tsx,js,jsx}'],
     plugins: {
@@ -62,8 +55,6 @@ export default [
       react: { version: 'detect' },
     },
     rules: {
-      'react/react-in-jsx-scope': 'off',
-      'react/jsx-uses-react': 'off',
       ...reactHooks.configs.recommended.rules,
     },
   },
