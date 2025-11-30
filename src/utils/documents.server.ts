@@ -257,7 +257,7 @@ export async function fetchRepoFile(
   filepath: string
 ) {
   const key = `${repoPair}:${ref}:${filepath}`
-  let [owner, repo] = repoPair.split('/')
+  const [owner, repo] = repoPair.split('/')
 
   const ttl = process.env.NODE_ENV === 'development' ? 1 : 1 * 60 * 1000 // 5 minute
   const file = await fetchCached({
