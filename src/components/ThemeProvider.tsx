@@ -6,11 +6,10 @@ import { z } from 'zod'
 import { THEME_COLORS } from '~/utils/utils'
 
 const themeModeSchema = z.enum(['light', 'dark', 'auto'])
-const resolvedThemeSchema = z.enum(['light', 'dark'])
 const themeKey = 'theme'
 
 type ThemeMode = z.infer<typeof themeModeSchema>
-type ResolvedTheme = z.infer<typeof resolvedThemeSchema>
+type ResolvedTheme = Exclude<ThemeMode, 'auto'>
 
 const getStoredThemeMode = createIsomorphicFn()
   .server((): ThemeMode => 'auto')
